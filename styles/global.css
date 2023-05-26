@@ -76,9 +76,15 @@
 .black_btn {
   @apply rounded-full border border-black bg-black py-1.5 px-5 text-white transition-all hover:bg-white hover:text-black text-center text-sm font-inter flex items-center justify-center;
 }
-
+.orange_btn {
+  @apply rounded-full border-none bg-orange-500 py-1.5 px-5 text-white transition-all hover:bg-gradient-to-r from-red-400 via-red-500 to-red-700 hover:text-black text-center text-sm font-inter flex items-center justify-center;
+}
 .outline_btn {
   @apply rounded-full border border-black bg-transparent py-1.5 px-5 text-black transition-all hover:bg-black hover:text-white text-center text-sm font-inter flex items-center justify-center;
+}
+
+.outline_red_btn {
+  @apply rounded-full border border-red-500 bg-transparent py-1.5 px-5 text-red-500 transition-all hover:text-black hover:border-black text-center text-sm font-inter flex items-center justify-center;
 }
 
 .head_text {
@@ -141,7 +147,7 @@
 }
 
 .dropdown {
-  @apply absolute right-0 top-full mt-3 w-full p-5 rounded-lg bg-white min-w-[210px] flex flex-col gap-2 justify-end items-end;
+  @apply absolute right-0 top-full mt-3 w-full p-5 rounded-lg bg-white min-w-[210px] flex flex-col gap-2 justify-end items-center;
 }
 
 .dropdown_link {

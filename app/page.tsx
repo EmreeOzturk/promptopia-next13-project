@@ -12,7 +12,7 @@ export default function Home() {
         Promptopia is a community of writers and artists who use AI to generate
         prompts for their work. We use the OpenAI GPT-4 API to generate prompts
       </p>
-
+      
       <Feed />
     </section>
   );
