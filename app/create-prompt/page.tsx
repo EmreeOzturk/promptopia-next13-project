@@ -17,13 +17,21 @@ const CreatePrompt = () => {
     e.preventDefault();
     setSubmitting(true);
     try {
-      const res = await fetch('/api/prompt', {
+      const res = await fetch('/api/prompt/new', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
         },
-        body: JSON.stringify(post),
+        body: JSON.stringify({
+          prompt: post.prompt,
+          tag: post.tag,
+          userId: session?.user?.id,
+        }),
       });
+      if (!res.ok) {
+        setSubmitting(false);
+        throw new Error(res.statusText);
+      }
       setSubmitting(false);
       router.push('/');
     } catch (error) {
