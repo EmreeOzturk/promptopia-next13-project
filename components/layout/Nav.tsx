@@ -8,16 +8,15 @@ import { signIn, signOut, useSession, getProviders } from 'next-auth/react';
 const Nav = () => {
   const [providers, setProviders] = useState(null);
   const [toogleDropdown, setToogleDropdown] = useState(false);
-  const isUserLoggedIn = true;
-
-  //   useEffect(() => {
-  //     const setProvidersList = async () => {
-  //       const providersList = await getProviders();
-  //       setProviders(providersList as any);
-  //     };
-  //     setProvidersList();
-  //     console.log(providers);
-  //   }, []);
+  const { data: session } = useSession();
+  useEffect(() => {
+    const setProvidersList = async () => {
+      const providersList = await getProviders();
+      setProviders(providersList as any);
+    };
+    setProvidersList();
+    console.log(providers);
+  }, []);
   return (
     <nav className="flex-between w-full mb-16 pt-3">
       <Link href="/" className="flex gap-2 flex-center">
@@ -33,8 +32,8 @@ const Nav = () => {
 
       {/* Desktop Nav  */}
       <div className="sm:flex hidden">
-        {isUserLoggedIn ? (
-          <div className="flex gap-3 md:gap-5">
+        {session?.user ? (
+          <div className="flex items-center gap-3 md:gap-5">
             <Link href="/create-prompt" className="orange_btn">
               Create Prompt
             </Link>
@@ -44,7 +43,7 @@ const Nav = () => {
 
             <Link href="/profile" className="flex gap-2 flex-center">
               <Image
-                src="/assets/images/logo.svg"
+                src={session?.user?.image || ''}
                 alt="Profile"
                 width={30}
                 height={30}
@@ -70,10 +69,10 @@ const Nav = () => {
 
       {/* Mobile Nav  */}
       <div className="sm:hidden relative flex gap-3">
-        {isUserLoggedIn ? (
+        {session?.user ? (
           <div className="flex">
             <Image
-              src="/assets/icons/menu.svg"
+              src={session?.user?.image || ''}
               alt="Profile"
               width={30}
               height={30}
@@ -81,7 +80,7 @@ const Nav = () => {
               onClick={() => setToogleDropdown((prevState) => !prevState)}
             />
             {toogleDropdown && (
-              <div className="dropdown text-center">
+              <div className="dropdown text-center ">
                 <div className="flex gap-2">
                   <Image
                     src="/assets/icons/copy.svg"
